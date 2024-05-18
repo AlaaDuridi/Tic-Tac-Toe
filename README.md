@@ -37,3 +37,9 @@ On the other hand, images that are used inside of components should typically be
 - Do this
   const updatedUser = { ...user}; (creating a copy via JS's `spread` operator)
   updatedUser.name = 'Max'; (editing the copy, not the original)
+
+## Lifting State Up
+
+- left the state up to the closes ancestor component that has access to all components that need to work with that state
+
+- let the Ancestor Component Mange the State, which is needed by Child Components
