@@ -6,6 +6,7 @@ const initialGameBoard = [
 
 export default function GameBoard({ onSelectSquare, turns }) {
   //transform turns into a gameBoard
+  //derived state
   let gameBoard = initialGameBoard;
 
   for (const turn of turns) {
