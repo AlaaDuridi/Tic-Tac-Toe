@@ -6,7 +6,9 @@ import Log from "./components/Log";
 
 //helper function
 const deriveActivePlayer = (gameTurns) => {
-  return gameTurns.length === 0 ? "X" : gameTurns[0].player;
+  let curPlayer = "X";
+  if (gameTurns.length > 0 && gameTurns[0].player === "X") curPlayer = "O";
+  return curPlayer;
 };
 
 function App() {
