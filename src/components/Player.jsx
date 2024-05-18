@@ -1,5 +1,6 @@
 import { useState } from "react";
-export default function Player({ name, symbol }) {
+export default function Player({ initialName, symbol }) {
+  const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEditClick = () => {
@@ -7,13 +8,26 @@ export default function Player({ name, symbol }) {
     setIsEditing((editing) => !editing);
   };
 
+  const handleChange = (event) => {
+    console.log(event);
+    setPlayerName(event.target.value);
+  };
+
   return (
     <li>
       <span className="player">
         {isEditing ? (
-          <input type="text" required value={name} />
+          <input
+            type="text"
+            required
+            //is also called two-way binding,
+            //because we're getting a value out of this input
+            //and we're feeding a value back into this input
+            value={playerName}
+            onChange={handleChange}
+          />
         ) : (
-          <span className="player-name">{name}</span>
+          <span className="player-name">{playerName}</span>
         )}
         <span className="player-symbol">{symbol}</span>
       </span>
