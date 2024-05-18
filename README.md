@@ -26,3 +26,14 @@ On the other hand, images that are used inside of components should typically be
   setIsEditing(!isEditing);
   setIsEditing(!isEditing);
 - (value still would change)
+
+- Update Object-State Immutably:
+  objects are reference values in JavaScript, so you should therefore NOT mutate them directly - instead create a (deep) copy first!
+
+- Do not do this
+  const updatedUser = user ; (will not create a copy since user is an object = a reference value)
+  user.name = 'Max'; (editing the user object in memory)
+
+- Do this
+  const updatedUser = { ...user}; (creating a copy via JS's `spread` operator)
+  updatedUser.name = 'Max'; (editing the copy, not the original)
