@@ -4,7 +4,9 @@
 ![image](https://github.com/AlaaDuridi/Tic-Tac-Toe/assets/51034664/03188f52-7898-4952-9cd3-f7ce94b17ea5)
 ![image](https://github.com/AlaaDuridi/Tic-Tac-Toe/assets/51034664/34d954be-cfcf-4b6c-80fe-adc082f85e44)
 
-# public/ vs assets/ for Image Storage
+# NOTES:
+
+## public/ vs assets/ for Image Storage
 
 ## The public/ directory
 
