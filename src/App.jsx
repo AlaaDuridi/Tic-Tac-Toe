@@ -3,6 +3,7 @@ import { useState } from "react";
 import Player from "./components/Player";
 import GameBoard from "./components/GamaBoard";
 import Log from "./components/Log";
+import GameOver from "./components/GameOver";
 import { WINNING_COMBINATIONS } from "./components/winning-combinations";
 
 const initialGameBoard = [
@@ -36,7 +37,7 @@ function App() {
     gameBoard[row][col] = player;
   }
 
-  let winner = null;
+  let winner;
 
   for (const combination of WINNING_COMBINATIONS) {
     //extract possible winning combination
@@ -59,6 +60,7 @@ function App() {
     }
   }
 
+  const hasDraw = gameTurns.length === 9 && !winner;
   const handleSelectSquare = (rowIndex, colIndex) => {
     //NOTE: avoid intersecting states, + update objects immutably
     setGameTurns((prevTurns) => {
@@ -89,7 +91,7 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
-        {winner && <p>You won, {winner}</p>}
+        {(winner || hasDraw) && <GameOver winner={winner} />}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
