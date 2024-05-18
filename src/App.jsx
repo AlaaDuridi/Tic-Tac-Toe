@@ -18,7 +18,6 @@ const deriveActivePlayer = (gameTurns) => {
   return curPlayer;
 };
 
-
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
   // const [hasWinner, setHasWinner] = useState(false) ; redundant state
@@ -26,7 +25,7 @@ function App() {
   //derive currentPlayer out of the turns
   const activePlayer = deriveActivePlayer(gameTurns);
 
-   //transform turns into a gameBoard
+  //transform turns into a gameBoard
   //derived state
   let gameBoard = initialGameBoard;
 
@@ -37,11 +36,27 @@ function App() {
     gameBoard[row][col] = player;
   }
 
+  let winner = null;
+
   for (const combination of WINNING_COMBINATIONS) {
     //extract possible winning combination
-    const firstSquareSymbol;
-    const secondSquareSymbol ;
-    const thirdSquareSymbol ;
+    const firstSquareSymbol =
+      gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol =
+      gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol =
+      gameBoard[combination[2].row][combination[2].column];
+
+    if (
+      firstSquareSymbol &&
+      firstSquareSymbol === secondSquareSymbol &&
+      firstSquareSymbol === thirdSquareSymbol
+    ) {
+      //there is a winner
+
+      winner = firstSquareSymbol;
+    } else {
+    }
   }
 
   const handleSelectSquare = (rowIndex, colIndex) => {
@@ -70,10 +85,11 @@ function App() {
           />
           <Player
             initialName="Player 2"
-            symbol="Y"
+            symbol="O"
             isActive={activePlayer === "O"}
           />
         </ol>
+        {winner && <p>You won, {winner}</p>}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
