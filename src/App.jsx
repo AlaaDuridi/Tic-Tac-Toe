@@ -3,18 +3,21 @@ import { useState } from "react";
 import Player from "./components/Player";
 import GameBoard from "./components/GamaBoard";
 import Log from "./components/Log";
+
+//helper function
+const deriveActivePlayer = (gameTurns) => {
+  return gameTurns.length === 0 ? "X" : gameTurns[0].player;
+};
+
 function App() {
-  const [activePlayer, setActivePlayer] = useState("X");
   const [gameTurns, setGameTurns] = useState([]);
+  //derive currentPlayer out of the turns
+  const activePlayer = deriveActivePlayer(gameTurns);
 
   const handleSelectSquare = (rowIndex, colIndex) => {
-    setActivePlayer((curActivePlayer) => (curActivePlayer === "X" ? "O" : "X"));
     //NOTE: avoid intersecting states, + update objects immutably
     setGameTurns((prevTurns) => {
-      let curActivePlayer = "X";
-      if (prevTurns.length > 0 && prevTurns[0].player === "X") {
-        curActivePlayer = "O";
-      }
+      let curActivePlayer = deriveActivePlayer(prevTurns);
       const updatedTurns = [
         // { square: { row: rowIndex, col: colIndex }, player: activePlayer }, avoid this, activePlayer s a state, avoid intersecting states
         {
