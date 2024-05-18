@@ -21,6 +21,10 @@ const deriveActivePlayer = (gameTurns) => {
 
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
+  const [players, setPlayers] = useState({
+    X: "Player 1",
+    O: "Player 2",
+  });
   // const [hasWinner, setHasWinner] = useState(false) ; redundant state
 
   //derive currentPlayer out of the turns
@@ -79,6 +83,15 @@ function App() {
 
   const handleRestart = () => {
     setGameTurns([]);
+  };
+
+  const handlePlayerNameChange = (symbol, newName) => {
+    setPlayers((prevPlayers) => {
+      return {
+        ...prevPlayers,
+        [symbol]: newName,
+      };
+    });
   };
   return (
     <main>
