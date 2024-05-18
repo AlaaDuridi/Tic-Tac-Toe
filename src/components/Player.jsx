@@ -17,7 +17,6 @@ export default function Player({
   };
 
   const handleChange = (event) => {
-    console.log(event);
     setPlayerName(event.target.value);
   };
 
