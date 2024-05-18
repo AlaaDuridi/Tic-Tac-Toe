@@ -6,6 +6,7 @@ import Log from "./components/Log";
 function App() {
   const [activePlayer, setActivePlayer] = useState("X");
   const [gameTurns, setGameTurns] = useState([]);
+
   const handleSelectSquare = (rowIndex, colIndex) => {
     setActivePlayer((curActivePlayer) => (curActivePlayer === "X" ? "O" : "X"));
     //NOTE: avoid intersecting states, + update objects immutably
@@ -18,7 +19,7 @@ function App() {
         // { square: { row: rowIndex, col: colIndex }, player: activePlayer }, avoid this, activePlayer s a state, avoid intersecting states
         {
           square: { row: rowIndex, col: colIndex },
-          player: (activePlayer = curActivePlayer),
+          player: curActivePlayer, //fixed
         },
         ...prevTurns,
       ];
@@ -40,10 +41,7 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
-        <GameBoard
-          activePlayer={activePlayer}
-          onSelectSquare={handleSelectSquare}
-        />
+        <GameBoard onSelectSquare={handleSelectSquare} turns={gameTurns} />
         <Log />
       </div>
     </main>
